@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <title>Ninja Gold</title>
+        <style>
+            .wrapper {
+                width: 70%;
+                margin: 0 auto;
+            }
+            .places {
+                display: flex;
+                justify-content: space-between;
+                margin: 0 auto;
+            }
+            .place {
+                text-align: center;
+                border: 1px solid black;
+                padding: 20px;
+                width: 17%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <p>Your Gold: {{request.session.gold}}</p>
+
+            <div class="places">
+                
+                <div class="place">
+                    <h2>Farm</h2>
+                    <p>(earns 10-20 golds)</p>
+                    <form action="/process_money/1" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value="Find Gold!">
+                    </form>
+                </div>
+
+                <div class="place">
+                    <h2>Cave</h2>
+                    <p>(earns 5-10 golds)</p>
+                    <form action="/process_money/2" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value="Find Gold!">
+                    </form>
+                </div>
+
+                <div class="place">
+                    <h2>House</h2>
+                    <p>(earns 2-5 golds)</p>
+                    <form action="/process_money/3" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value="Find Gold!">
+                    </form>
+                </div>
+
+                <div class="place">
+                    <h2>Casino</h2>
+                    <p>(earns/takes 0-50 golds)</p>
+                    <form action="/process_money/4" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" value="Find Gold!">
+                    </form>
+                </div>
+
+            </div>
+
+            <br>
+            Activities:
+            {% for activity in request.session.activities %}
+            <p style="color:{{activity.color}}">{{activity.activity_str}}</p>
+            {% endfor %}
+
+        </div>
+    </body>
+</html>
